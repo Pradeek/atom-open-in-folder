@@ -1,22 +1,25 @@
+path = require 'path'
+fs = require 'fs'
+packagePath = atom.packages.resolvePackagePath('fuzzy-finder')
+FuzzyFinderView = require path.join(packagePath, 'lib', 'fuzzy-finder-view')
+
 module.exports =
-class AtomOpenInFolderView
-  constructor: (serializedState) ->
-    # Create root element
-    @element = document.createElement('div')
-    @element.classList.add('atom-open-in-folder')
+class AtomOpenInFolderView extends FuzzyFinderView
+  initialize: () ->
+    super
 
-    # Create message element
-    message = document.createElement('div')
-    message.textContent = "The AtomOpenInFolder package is Alive! It's ALIVE!"
-    message.classList.add('message')
-    @element.appendChild(message)
-
-  # Returns an object that can be retrieved when package is activated
-  serialize: ->
-
-  # Tear down any state and detach
-  destroy: ->
-    @element.remove()
-
-  getElement: ->
-    @element
+  toggle: ->
+    if @panel?.isVisible()
+      @cancel()
+    else
+      editor = atom.workspace.getActiveTextEditor()
+      paths = []
+      if editor
+        dirPath = editor.getDirectoryPath()
+        fs.readdir(dirPath,
+          ((err, files) ->
+            paths = (path.join(dirPath, file) for file in files) if not err
+            if paths.length > 0
+              @setItems paths
+              @show()).bind(this)
+        )

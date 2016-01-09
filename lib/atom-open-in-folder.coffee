@@ -1,33 +1,27 @@
-AtomOpenInFolderView = require './atom-open-in-folder-view'
 {CompositeDisposable} = require 'atom'
 
 module.exports = AtomOpenInFolder =
-  atomOpenInFolderView: null
-  modalPanel: null
+  currentFolderView: null
   subscriptions: null
 
   activate: (state) ->
-    @atomOpenInFolderView = new AtomOpenInFolderView(state.atomOpenInFolderViewState)
-    @modalPanel = atom.workspace.addModalPanel(item: @atomOpenInFolderView.getElement(), visible: false)
-
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     @subscriptions = new CompositeDisposable
 
     # Register command that toggles this view
-    @subscriptions.add atom.commands.add 'atom-workspace', 'atom-open-in-current-folder:toggle': => @toggle()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'atom-open-in-current-folder:toggle':
+      => @createCurrentFolderView().toggle()
+
+  createCurrentFolderView: ->
+    unless @currentFolderView?
+      AtomOpenInFolderView = require './atom-open-in-folder-view'
+      @currentFolderView = new AtomOpenInFolderView()
+    @currentFolderView
 
   deactivate: ->
     @modalPanel.destroy()
     @subscriptions.dispose()
-    @atomOpenInFolderView.destroy()
+    @currentFolderView?.destroy()
 
   serialize: ->
-    atomOpenInFolderViewState: @atomOpenInFolderView.serialize()
-
-  toggle: ->
-    console.log 'AtomOpenInFolder was toggled!'
-
-    if @modalPanel.isVisible()
-      @modalPanel.hide()
-    else
-      @modalPanel.show()
+    @currentFolderView?.serialize()
