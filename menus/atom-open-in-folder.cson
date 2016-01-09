@@ -1,0 +1,22 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Open files in current folder'
+      'command': 'atom-open-in-current-folder:toggle'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'Open in folder'
+      'submenu': [
+        {
+          'label': 'Open in current folder'
+          'command': 'atom-open-in-current-folder:toggle'
+        }
+      ]
+    ]
+  }
+]
