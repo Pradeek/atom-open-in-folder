@@ -3,7 +3,7 @@
   'atom-text-editor': [
     {
       'label': 'Open files in current folder'
-      'command': 'atom-open-in-current-folder:toggle'
+      'command': 'open-in-current-folder:toggle'
     }
   ]
 'menu': [
@@ -14,7 +14,7 @@
       'submenu': [
         {
           'label': 'Open in current folder'
-          'command': 'atom-open-in-current-folder:toggle'
+          'command': 'open-in-current-folder:toggle'
         }
       ]
     ]

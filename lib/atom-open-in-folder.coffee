@@ -9,7 +9,7 @@ module.exports = AtomOpenInFolder =
     @subscriptions = new CompositeDisposable
 
     # Register command that toggles this view
-    @subscriptions.add atom.commands.add 'atom-workspace', 'atom-open-in-current-folder:toggle':
+    @subscriptions.add atom.commands.add 'atom-workspace', 'open-in-current-folder:toggle':
       => @createCurrentFolderView().toggle()
 
   createCurrentFolderView: ->

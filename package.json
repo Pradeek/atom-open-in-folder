@@ -3,10 +3,9 @@
   "main": "./lib/atom-open-in-folder",
   "version": "0.1.0",
   "description": "Fuzzy search for files in current folder",
-  "keywords": [
-  ],
+  "keywords": ["atom", "fuzzy-search"],
   "activationCommands": {
-    "atom-workspace": "atom-open-in-current-folder:toggle"
+    "atom-workspace": "open-in-current-folder:toggle"
   },
   "repository": "https://github.com/pradeek/atom-open-in-folder",
   "license": "MIT",
