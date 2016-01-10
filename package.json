@@ -1,9 +1,12 @@
 {
   "name": "open-in-folder",
   "main": "./lib/atom-open-in-folder",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Fuzzy search for files in current folder",
-  "keywords": ["atom", "fuzzy-search"],
+  "keywords": [
+    "atom",
+    "fuzzy-search"
+  ],
   "activationCommands": {
     "atom-workspace": "open-in-current-folder:toggle"
   },
@@ -12,6 +15,5 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
